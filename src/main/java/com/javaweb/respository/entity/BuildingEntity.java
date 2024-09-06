@@ -1,47 +1,42 @@
 package com.javaweb.respository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "building")
 public class BuildingEntity {
 	
-	@Column(name = "name")
+
 	private String name;
 	
-	@Column(name = "street")
+
 	private String street;
 	
-	@Column(name = "ward")
+
 	private String ward;
 	
-	@Column(name = "managername")
+
 	private String managerName;
-	
-	@Column(name = "name")
+
+
 	private String managerPhoneNumber;
 	
-	@Column(name = "id")
+
 	private Integer id;
 	
-	@Column(name = "numberofbasement")
+
 	private Integer numberOfBasement;
 	
-	@Column(name = "floorarea")
+
 	private Integer floorArea;
 	
-	@Column(name = "rentprice")
+
 	private Integer rentPrice;
 	
-	@Column(name = "servicefee")
+
 	private Integer serviceFee;
 	
-	@Column(name = "brokeragefee")
+
 	private Integer brokerageFee;
 	
-	@Column(name = "districtId")
+
 	private Integer districtId;
 
 	public BuildingEntity(String name, String street, String ward, String managerName, String managerPhoneNumber,
