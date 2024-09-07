@@ -1,10 +1,10 @@
 package com.javaweb.respository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.respository.entity.BuildingEntity;
 
 public interface BuildingRespository {
-	ArrayList<BuildingEntity> listBuildingRepo(BuildingSearchBuilder buildingSearchBuilder);
+	List<BuildingEntity> listBuildingRepo(BuildingSearchBuilder buildingSearchBuilder);
 }

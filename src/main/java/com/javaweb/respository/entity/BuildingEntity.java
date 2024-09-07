@@ -1,47 +1,64 @@
 package com.javaweb.respository.entity;
 
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name  = "building")
 public class BuildingEntity {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
+	@Column(name = "name")
 	private String name;
-	
 
+	@Column(name = "street")
 	private String street;
-	
 
+	@Column(name = "ward")
 	private String ward;
-	
 
+	@Column(name = "managername")
 	private String managerName;
 
-
+	@Column(name = "managerphonenumber")
 	private String managerPhoneNumber;
-	
 
-	private Integer id;
-	
-
+	@Column(name = "numberofbasement")
 	private Integer numberOfBasement;
-	
 
+	@Column(name = "floorarea")
 	private Integer floorArea;
-	
 
+	@Column(name = "rentprice")
 	private Integer rentPrice;
-	
 
+	@Column(name = "servicefee")
 	private Integer serviceFee;
-	
 
+	@Column(name = "brokeragefee")
 	private Integer brokerageFee;
-	
 
+	@Column(name = "districtid", insertable = false, updatable = false)
 	private Integer districtId;
 
+	@ManyToOne
+	@JoinColumn(name = "districtid")
+	DistrictEntity districtEntity = new DistrictEntity();
+
+	@OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
+	private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
+
+	public BuildingEntity() {
+	}
+
 	public BuildingEntity(String name, String street, String ward, String managerName, String managerPhoneNumber,
-			Integer id, Integer numberOfBasement, Integer floorArea, Integer rentPrice,
-			Integer serviceFee, Integer brokerageFee, Integer districtId) {
+						  Integer id, Integer numberOfBasement, Integer floorArea, Integer rentPrice,
+						  Integer serviceFee, Integer brokerageFee, Integer districtId) {
 		this.id = id;
 
 		this.name = name;
@@ -63,8 +80,24 @@ public class BuildingEntity {
 		this.serviceFee = serviceFee;
 
 		this.brokerageFee = brokerageFee;
-		
+
 		this.districtId = districtId;
+	}
+
+	public DistrictEntity getDistrictEntity() {
+		return districtEntity;
+	}
+
+	public void setDistrictEntity(DistrictEntity districtEntity) {
+		this.districtEntity = districtEntity;
+	}
+
+	public List<RentAreaEntity> getRentAreaEntities() {
+		return rentAreaEntities;
+	}
+
+	public void setRentAreaEntities(List<RentAreaEntity> rentAreaEntities) {
+		this.rentAreaEntities = rentAreaEntities;
 	}
 
 	public Integer getDistrictId() {

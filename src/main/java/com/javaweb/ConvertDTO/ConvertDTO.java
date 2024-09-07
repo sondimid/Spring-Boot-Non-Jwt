@@ -1,6 +1,6 @@
 package com.javaweb.ConvertDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -8,20 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.javaweb.api.BuildingDTO;
-import com.javaweb.respository.DistrictRepository;
-import com.javaweb.respository.RentAreaRepository;
 import com.javaweb.respository.entity.BuildingEntity;
-import com.javaweb.respository.entity.DistrictEntiry;
+import com.javaweb.respository.entity.DistrictEntity;
 import com.javaweb.respository.entity.RentAreaEntity;
 
 @Component
 public class ConvertDTO {
-	
-	@Autowired
-	private DistrictRepository districtRepository;
-	
-	@Autowired
-	private RentAreaRepository rentAreaRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -30,10 +22,10 @@ public class ConvertDTO {
 
 		BuildingDTO buildingDTO = modelMapper.map(buildingEntity, BuildingDTO.class);
 		
-		DistrictEntiry districtEntiry = districtRepository.getById(buildingEntity.getDistrictId());
-		buildingDTO.setAddress(buildingEntity.getStreet() + ", " + buildingEntity.getWard() + ", " + districtEntiry.getName());
+		DistrictEntity districtEntity = buildingEntity.getDistrictEntity();
+		buildingDTO.setAddress(buildingEntity.getStreet() + ", " + buildingEntity.getWard() + ", " + districtEntity.getName());
 		
-		ArrayList<RentAreaEntity> rentAreaEntities = rentAreaRepository.getById(buildingEntity.getId()); 
+		List<RentAreaEntity> rentAreaEntities = buildingEntity.getRentAreaEntities();
 		
 		String rentArea = rentAreaEntities.stream().map(it -> it.getValue().toString()).collect(Collectors.joining(", "));
 		
