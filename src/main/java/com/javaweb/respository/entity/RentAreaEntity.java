@@ -1,13 +1,40 @@
 package com.javaweb.respository.entity;
 
-public class RentAreaEntity {
-	private Integer id, value, buildingid;
+import jakarta.persistence.*;
 
-	public RentAreaEntity(Integer id, Integer value, Integer buildingid) {
+@Entity
+@Table(name = "rentarea")
+public class RentAreaEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@Column(name = "value")
+	private Integer value;
+
+	@Column(name = "buildingid", insertable = false, updatable = false)
+	private Integer buildingId;
+
+	@ManyToOne
+	@JoinColumn(name = "buildingid")
+	BuildingEntity buildingEntity = new BuildingEntity();
+
+	public RentAreaEntity() {
+	}
+
+	public RentAreaEntity(Integer id, Integer value, Integer buildingId) {
 		super();
 		this.id = id;
 		this.value = value;
-		this.buildingid = buildingid;
+		this.buildingId = buildingId;
+	}
+
+	public BuildingEntity getBuildingEntity() {
+		return buildingEntity;
+	}
+
+	public void setBuildingEntity(BuildingEntity buildingEntity) {
+		this.buildingEntity = buildingEntity;
 	}
 
 	public Integer getId() {
@@ -26,12 +53,12 @@ public class RentAreaEntity {
 		this.value = value;
 	}
 
-	public Integer getBuildingid() {
-		return buildingid;
+	public Integer getBuildingId() {
+		return buildingId;
 	}
 
-	public void setBuildingid(Integer buildingid) {
-		this.buildingid = buildingid;
+	public void setBuildingId(Integer buildingId) {
+		this.buildingId = buildingId;
 	}
 	
 }

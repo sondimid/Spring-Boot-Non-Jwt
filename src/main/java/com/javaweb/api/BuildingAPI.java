@@ -19,7 +19,7 @@ public class BuildingAPI {
 	@GetMapping(value = "/api/building/")
 	public List<BuildingDTO> getBuildingDTOs(@RequestParam Map<String, Object> params,
 			@RequestParam(name = "typeCode", required = false) ArrayList<String> typeCode){
-		ArrayList<BuildingDTO> buildingDTOs = buildingService.listService(params, typeCode);
+		List<BuildingDTO> buildingDTOs = buildingService.listService(params, typeCode);
 		
 		return buildingDTOs;
 	}

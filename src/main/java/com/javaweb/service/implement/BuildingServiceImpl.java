@@ -1,6 +1,7 @@
 package com.javaweb.service.implement;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,13 @@ public class BuildingServiceImpl implements BuildingService {
 	private BuildingSearchBuilderConverter buildingSearchBuilderConverter;
 
 	@Override
-	public ArrayList<BuildingDTO> listService(Map<String, Object> map, ArrayList<String> typeCode) {
+	public List<BuildingDTO> listService(Map<String, Object> map, ArrayList<String> typeCode) {
 
-		ArrayList<BuildingDTO> result = new ArrayList<>();
-		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(map,
-				typeCode);
-		ArrayList<BuildingEntity> list = buildingRespository.listBuildingRepo(buildingSearchBuilder);
+		List<BuildingDTO> result = new ArrayList<>();
+		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(map,typeCode);
+
+		List<BuildingEntity> list = buildingRespository.listBuildingRepo(buildingSearchBuilder);
+
 		for (BuildingEntity buildingEntity : list) {
 			BuildingDTO buildingDTO = convertDTO.toBuildingDTO(buildingEntity);
 			result.add(buildingDTO);

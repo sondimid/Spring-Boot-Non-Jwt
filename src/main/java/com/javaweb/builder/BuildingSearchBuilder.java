@@ -1,12 +1,13 @@
 package com.javaweb.builder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BuildingSearchBuilder {
 	private String name, street, ward, managerName, managerPhoneNumber;
 	private Integer numberOfBasement, floorArea, rentPriceFrom, rentPriceTo, rentAreaFrom, rentAreaTo, staffId,
 			serviceFee, brokerageFee, districtId;
-	private ArrayList<String> typeCode = new ArrayList<String>();
+	private List<String> typeCode = new ArrayList<>();
 
 	private BuildingSearchBuilder(Builder builder) {
 		this.name = builder.name;
@@ -25,7 +26,7 @@ public class BuildingSearchBuilder {
 		this.staffId = builder.staffId;
 	}
 
-	public ArrayList<String> getTypeCode() {
+	public List<String> getTypeCode() {
 		return typeCode;
 	}
 

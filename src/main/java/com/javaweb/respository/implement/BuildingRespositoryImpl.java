@@ -1,15 +1,15 @@
 package com.javaweb.respository.implement;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import com.javaweb.Connector.Connector;
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.respository.BuildingRespository;
 import com.javaweb.respository.entity.BuildingEntity;
@@ -17,25 +17,26 @@ import com.javaweb.utils.NumberUtil;
 import com.javaweb.utils.StringUtil;
 
 @Repository
+@Primary
 public class BuildingRespositoryImpl implements BuildingRespository {
 
 	public void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		Integer staffId = buildingSearchBuilder.getStaffId();
 		Integer rentAreaFrom = buildingSearchBuilder.getRentAreaFrom();
 		Integer rentAreaTo = buildingSearchBuilder.getRentAreaTo();
-		ArrayList<String> typeCode = buildingSearchBuilder.getTypeCode();
+		List<String> typeCode = buildingSearchBuilder.getTypeCode();
 
 		if (staffId != null) {
-			sql.append(" JOIN assignmentbuilding a ON b.id = a.staffid");
+			sql.append(" JOIN assignmentbuilding a ON b.id = a.staffid ");
 		}
 
-		if (typeCode != null && typeCode.size() != 0) {
-			sql.append(" JOIN buildingrenttype br ON b.id = br.buildingid");
+		if (typeCode != null && !typeCode.isEmpty()) {
+			sql.append(" JOIN buildingrenttype br ON b.id = br.buildingid ");
 			sql.append(" JOIN renttype r ON br.renttypeid = r.id");
 		}
 
 		if (rentAreaFrom != null || rentAreaTo != null) {
-			sql.append(" JOIN rentarea ra ON b.id = ra.buildingid");
+			sql.append(" JOIN rentarea ra ON b.id = ra.buildingid ");
 		}
 	}
 
@@ -67,13 +68,15 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 			e.printStackTrace();
 		}
 	}
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	public void querySpecial(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		
 		Integer staffId = buildingSearchBuilder.getStaffId();
 		Integer rentAreaFrom = buildingSearchBuilder.getRentAreaFrom();
 		Integer rentAreaTo = buildingSearchBuilder.getRentAreaTo();
-		ArrayList<String> typeCode = buildingSearchBuilder.getTypeCode();
+		List<String> typeCode = buildingSearchBuilder.getTypeCode();
 
 		if (staffId != null) {
 			sql.append(" AND a.staffid = " + staffId);
@@ -96,31 +99,15 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 	}
 
 	@Override
-	public ArrayList<BuildingEntity> listBuildingRepo(BuildingSearchBuilder buildingSearchBuilder) {
+	public List<BuildingEntity> listBuildingRepo(BuildingSearchBuilder buildingSearchBuilder) {
 		StringBuilder sql = new StringBuilder("SELECT b.* FROM building b");
 		joinTable(buildingSearchBuilder, sql);
 		queryNormal(buildingSearchBuilder, sql);
 		querySpecial(buildingSearchBuilder, sql);
 
-		ArrayList<BuildingEntity> list = new ArrayList<>();
-		try (Connection connection = Connector.getConnect();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery(sql.toString());) {
-			while (resultSet.next()) {
-				BuildingEntity buildingEntity = new BuildingEntity(resultSet.getString("name"),
-						resultSet.getString("street"), resultSet.getString("ward"), resultSet.getString("managername"),
-						resultSet.getString("managerphonenumber"), resultSet.getInt("id"),
-						resultSet.getInt("numberofbasement"), resultSet.getInt("floorarea"),
-						resultSet.getInt("rentprice"), resultSet.getInt("servicefee"), resultSet.getInt("brokeragefee"),
-						resultSet.getInt("districtid"));
+		Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
+		return query.getResultList();
 
-				list.add(buildingEntity);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
 	}
 
 }
