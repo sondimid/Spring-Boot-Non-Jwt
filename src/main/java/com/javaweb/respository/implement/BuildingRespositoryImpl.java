@@ -34,7 +34,7 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 			sql.append(" JOIN buildingrenttype br ON b.id = br.buildingid ");
 			sql.append(" JOIN renttype r ON br.renttypeid = r.id");
 		}
-
+gdfhfghfgh
 		if (rentAreaFrom != null || rentAreaTo != null) {
 			sql.append(" JOIN rentarea ra ON b.id = ra.buildingid ");
 		}
