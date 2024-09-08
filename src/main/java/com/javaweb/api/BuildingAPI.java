@@ -16,6 +16,7 @@ public class BuildingAPI {
 	
 	@Autowired
 	private BuildingService buildingService;
+
 	@GetMapping(value = "/api/building/")
 	public List<BuildingDTO> getBuildingDTOs(@RequestParam Map<String, Object> params,
 			@RequestParam(name = "typeCode", required = false) ArrayList<String> typeCode){
