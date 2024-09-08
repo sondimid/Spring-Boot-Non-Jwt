@@ -1,10 +1,10 @@
-package com.javaweb.repository.implement;
+package com.javaweb.repository.custom.impl;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.javaweb.repository.custom.impl.BuildingRepositoryCustom;
+import com.javaweb.repository.BuildingRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;

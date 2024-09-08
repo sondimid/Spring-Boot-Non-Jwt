@@ -1,9 +1,8 @@
-package com.javaweb.repository.custom.impl;
+package com.javaweb.repository;
 
 
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.repository.entity.BuildingEntity;
-import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
