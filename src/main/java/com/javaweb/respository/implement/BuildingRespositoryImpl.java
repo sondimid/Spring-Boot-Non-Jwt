@@ -23,6 +23,7 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 		Integer staffId = buildingSearchBuilder.getStaffId();
 		Integer rentAreaFrom = buildingSearchBuilder.getRentAreaFrom();
 		Integer rentAreaTo = buildingSearchBuilder.getRentAreaTo();
+		Integer districtId = buildingSearchBuilder.getDistrictId();
 		ArrayList<String> typeCode = buildingSearchBuilder.getTypeCode();
 
 		if (staffId != null) {
@@ -36,6 +37,10 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 
 		if (rentAreaFrom != null || rentAreaTo != null) {
 			sql.append(" JOIN rentarea ra ON b.id = ra.buildingid");
+		}
+
+		if(districtId != null){
+			sql.append(" JOIN district d ON d.id = b.districtid ");
 		}
 	}
 
@@ -73,20 +78,34 @@ public class BuildingRespositoryImpl implements BuildingRespository {
 		Integer staffId = buildingSearchBuilder.getStaffId();
 		Integer rentAreaFrom = buildingSearchBuilder.getRentAreaFrom();
 		Integer rentAreaTo = buildingSearchBuilder.getRentAreaTo();
+		Integer rentPriceFrom = buildingSearchBuilder.getRentPriceFrom();
+		Integer rentPriceTo = buildingSearchBuilder.getRentPriceTo();
+		Integer districtId = buildingSearchBuilder.getDistrictId();
 		ArrayList<String> typeCode = buildingSearchBuilder.getTypeCode();
 
 		if (staffId != null) {
-			sql.append(" AND a.staffid = " + staffId);
+			sql.append(" AND a.staffid = " + staffId.toString());
 		}
 
 		if (rentAreaFrom != null) {
-			sql.append(" AND ra.value >=" + rentAreaFrom);
+			sql.append(" AND ra.value >=" + rentAreaFrom.toString());
 		}
 
 		if (rentAreaTo != null) {
-			sql.append(" AND ra.value <=" + rentAreaTo);
+			sql.append(" AND ra.value <=" + rentAreaTo.toString());
 		}
 
+		if (rentPriceFrom != null) {
+			sql.append(" AND d.rentprice >=" + rentPriceFrom.toString());
+		}
+
+		if (rentPriceTo != null) {
+			sql.append(" AND d.rentprice <=" + rentPriceTo.toString());
+		}
+
+		if(districtId != null){
+			sql.append(" AND d.id = " + districtId.toString());
+		}
 		if (typeCode != null && typeCode.size() > 0) {
 			sql.append(" AND( ");
 			String tmp = typeCode.stream().map(it -> "r.code LIKE '%" + it + "%'").collect(Collectors.joining(" OR "));

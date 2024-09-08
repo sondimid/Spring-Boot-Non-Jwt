@@ -11,7 +11,6 @@ public class DistrictEntiry {
 		this.id = id;
 	}
 	public DistrictEntiry() {
-		// TODO Auto-generated constructor stub
 	}
 	public String getCode() {
 		return code;

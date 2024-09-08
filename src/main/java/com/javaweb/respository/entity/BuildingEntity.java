@@ -1,41 +1,28 @@
 package com.javaweb.respository.entity;
 
-
 public class BuildingEntity {
-	
 
 	private String name;
-	
 
 	private String street;
-	
 
 	private String ward;
-	
 
 	private String managerName;
 
-
 	private String managerPhoneNumber;
-	
 
 	private Integer id;
-	
 
 	private Integer numberOfBasement;
-	
 
 	private Integer floorArea;
-	
 
 	private Integer rentPrice;
-	
 
 	private Integer serviceFee;
-	
 
 	private Integer brokerageFee;
-	
 
 	private Integer districtId;
 
