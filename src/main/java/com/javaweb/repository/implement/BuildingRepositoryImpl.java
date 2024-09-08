@@ -1,10 +1,10 @@
-package com.javaweb.respository.implement;
+package com.javaweb.repository.implement;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.javaweb.respository.custom.impl.BuildingRepositoryCustom;
+import com.javaweb.repository.custom.impl.BuildingRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.builder.BuildingSearchBuilder;
-import com.javaweb.respository.BuildingRespository;
-import com.javaweb.respository.entity.BuildingEntity;
+
+import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.utils.NumberUtil;
 import com.javaweb.utils.StringUtil;
 
 @Repository
 @Primary
-public class BuildingRespositoryImpl implements BuildingRepositoryCustom {
+public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 
 	public void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		Integer staffId = buildingSearchBuilder.getStaffId();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.javaweb.repository.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,14 @@ import com.javaweb.ConvertDTO.BuildingSearchBuilderConverter;
 import com.javaweb.ConvertDTO.ConvertDTO;
 import com.javaweb.api.BuildingDTO;
 import com.javaweb.builder.BuildingSearchBuilder;
-import com.javaweb.respository.BuildingRespository;
-import com.javaweb.respository.entity.BuildingEntity;
+import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.service.BuildingService;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
 
 	@Autowired
-	private BuildingRespository buildingRespository;
+	private BuildingRepository buildingRepository;
 
 	@Autowired
 	private ConvertDTO convertDTO;
@@ -33,7 +33,7 @@ public class BuildingServiceImpl implements BuildingService {
 		List<BuildingDTO> result = new ArrayList<>();
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(map,typeCode);
 
-		List<BuildingEntity> list = buildingRespository.listBuildingRepo(buildingSearchBuilder);
+		List<BuildingEntity> list = buildingRepository.findByBuildingSearchBuilder(buildingSearchBuilder);
 
 		for (BuildingEntity buildingEntity : list) {
 			BuildingDTO buildingDTO = convertDTO.toBuildingDTO(buildingEntity);
