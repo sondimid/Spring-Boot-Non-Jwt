@@ -1,4 +1,4 @@
-package com.javaweb.respository.implement;
+package com.javaweb.repository.implement;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.builder.BuildingSearchBuilder;
-import com.javaweb.respository.BuildingRespository;
-import com.javaweb.respository.entity.BuildingEntity;
+import com.javaweb.repository.BuildingRepository;
+import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.utils.NumberUtil;
 import com.javaweb.utils.StringUtil;
 
 @Repository
 @Primary
-public class BuildingRespositoryImpl implements BuildingRespository {
+public class BuildingRepositoryImpl implements BuildingRepository {
 
 	public void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		Integer staffId = buildingSearchBuilder.getStaffId();

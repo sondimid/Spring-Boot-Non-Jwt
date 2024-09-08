@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.javaweb.api.BuildingDTO;
-import com.javaweb.respository.entity.BuildingEntity;
-import com.javaweb.respository.entity.DistrictEntity;
-import com.javaweb.respository.entity.RentAreaEntity;
+import com.javaweb.repository.entity.BuildingEntity;
+import com.javaweb.repository.entity.DistrictEntity;
+import com.javaweb.repository.entity.RentAreaEntity;
 
 @Component
 public class ConvertDTO {

@@ -1,4 +1,4 @@
-package com.javaweb.respository.entity;
+package com.javaweb.repository.entity;
 
 import jakarta.persistence.*;
 

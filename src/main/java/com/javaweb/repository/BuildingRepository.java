@@ -1,10 +1,10 @@
-package com.javaweb.respository;
+package com.javaweb.repository;
 
 import java.util.List;
 
 import com.javaweb.builder.BuildingSearchBuilder;
-import com.javaweb.respository.entity.BuildingEntity;
+import com.javaweb.repository.entity.BuildingEntity;
 
-public interface BuildingRespository {
+public interface BuildingRepository {
 	List<BuildingEntity> listBuildingRepo(BuildingSearchBuilder buildingSearchBuilder);
 }

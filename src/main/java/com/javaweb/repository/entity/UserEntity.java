@@ -1,7 +1,6 @@
-package com.javaweb.respository.entity;
+package com.javaweb.repository.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Generated;
 
 import java.util.ArrayList;
 import java.util.List;
